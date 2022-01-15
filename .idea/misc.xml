@@ -6,6 +6,7 @@
         <entry key="app/src/main/res/layout/activity_generate_dog.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_recent_dogs.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/dog_list_item.xml" value="0.1" />
       </map>
     </option>
   </component>

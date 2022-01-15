@@ -18,5 +18,13 @@ class ImageCache {
         imageCache.put(key, image)
         Log.d("Cache", "JithinSyam cache size is " + cacheKeys.size)
     }
+    fun getImages() : ArrayList<Bitmap> {
+        val list = ArrayList<Bitmap> ()
+        for(var key in cacheKeys){
+            if (imageCache.get(key) != null) {
+                list.add(imageCache.get(key))
+            }
+        }
+    }
 
 }

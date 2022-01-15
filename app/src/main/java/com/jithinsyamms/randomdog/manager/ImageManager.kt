@@ -9,4 +9,7 @@ object ImageManager {
    fun addImage(image: Bitmap) {
        imageCache.cacheImage(image = image)
    }
+   fun getImages(): ArrayList<Bitmap> {
+       imageCache.
+   }
 }
