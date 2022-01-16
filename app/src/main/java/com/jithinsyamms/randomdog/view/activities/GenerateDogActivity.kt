@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.jithinsyamms.randomdog.R
 import com.jithinsyamms.randomdog.image.ImageListener
@@ -30,5 +31,10 @@ class GenerateDogActivity : AppCompatActivity(), ImageListener {
     override fun imageDownloaded(image: Bitmap) {
         dogImageView?.setImageBitmap(image)
         generateButton.isEnabled = true
+    }
+
+    override fun downloadError() {
+        generateButton.isEnabled = true
+        Toast.makeText(this,"Download Error", Toast.LENGTH_SHORT).show()
     }
 }

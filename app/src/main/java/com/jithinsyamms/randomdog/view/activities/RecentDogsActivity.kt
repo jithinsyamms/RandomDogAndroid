@@ -41,5 +41,9 @@ class RecentDogsActivity : AppCompatActivity(), ImageListener {
 
     }
 
+    override fun downloadError() {
+
+    }
+
 
 }
