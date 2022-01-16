@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
+import com.jithinsyamms.randomdog.DBHelper
 import com.jithinsyamms.randomdog.R
 import com.jithinsyamms.randomdog.manager.ImageManager
 import com.jithinsyamms.randomdog.network.NetworkManager
@@ -17,10 +18,15 @@ class GenerateDogActivity : AppCompatActivity() {
         setContentView(R.layout.activity_generate_dog)
         dogImageView  = findViewById<ImageView>(R.id.dogImageView)
         findViewById<Button>(R.id.generate).setOnClickListener {
+            Log.d("Network", "JithinSyam calling getRandomDog in activity")
             NetworkManager.getRandomDog{ bitmap ->
-                Log.d("Network", "Received bitmap")
+                Log.d("Network", "JithinSyam Received bitmap")
                 dogImageView?.setImageBitmap(bitmap)
                 ImageManager.addImage(bitmap)
+
+                val dbHelper = DBHelper(this)
+
+
             }
         }
     }

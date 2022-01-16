@@ -61,7 +61,8 @@ class RecentDogsActivity : AppCompatActivity() {
         layoutManager.orientation = LinearLayoutManager.HORIZONTAL
         imageList.setLayoutManager(layoutManager)
 
-        var list = ImageManager.
-
+        var list = ImageManager.getImages()
+        var adapter = ImageListAdapter(list)
+        imageList.adapter = adapter
     }
 }

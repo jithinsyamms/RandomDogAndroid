@@ -25,12 +25,13 @@ object NetworkManager {
                getDogImage(imageUrl, completion)
            }
            catch (error: JSONException){
-
+               Log.d("Network","JithinSyam JSONException")
            }
 
        }, { error ->
            Log.d("Network",error.localizedMessage)
        })
+        Log.d("Network","JithinSyam Adding request to queue")
        requestQueue.add(request)
     }
 
@@ -43,14 +44,16 @@ object NetworkManager {
                     Log.d("Network","JithinSyam getDogImage success")
                     Log.d("Network","Image download Success")
                 },
-                400, // max width
-                400, // max height
+                0, // max width
+                0, // max height
                 ImageView.ScaleType.CENTER_CROP, // image scale type
                 Bitmap.Config.ARGB_8888, // decode config
                 { error-> // error listener
+                    Log.d("Network","JithinSyam getDogImage error")
                     Log.d("Network",error.localizedMessage)
                 }
         )
+        Log.d("Network","JithinSyam Adding request to queue")
         requestQueue.add(imageRequest)
     }
 
