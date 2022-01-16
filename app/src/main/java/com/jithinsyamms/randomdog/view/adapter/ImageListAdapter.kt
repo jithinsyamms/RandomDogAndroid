@@ -27,8 +27,6 @@ class ImageListAdapter(private val imageList: List<Bitmap>) : RecyclerView.Adapt
 
     override fun onBindViewHolder(holder: ImageHolder, position: Int) {
         val dogImage = imageList[position]
-
-        // sets the image to the imageview from our itemHolder class
         holder.imageView.setImageBitmap(dogImage)
     }
 
