@@ -6,19 +6,20 @@
 
     <application android:name=".GlobalApplication"
         android:allowBackup="true"
+        android:fullBackupOnly="true"
         android:icon="@mipmap/ic_app_icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RandomDog">
         <activity
-            android:name=".activities.RecentDogsActivity"
+            android:name=".view.activities.RecentDogsActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.GenerateDogActivity"
+            android:name=".view.activities.GenerateDogActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.RandomDogActivity"
+            android:name=".view.activities.RandomDogActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

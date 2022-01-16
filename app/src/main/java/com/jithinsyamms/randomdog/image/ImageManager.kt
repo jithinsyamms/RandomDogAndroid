@@ -1,17 +1,16 @@
-package com.jithinsyamms.randomdog.manager
+package com.jithinsyamms.randomdog.image
 
 import android.graphics.Bitmap
-import com.jithinsyamms.randomdog.DBHelper
 import com.jithinsyamms.randomdog.GlobalApplication
-import com.jithinsyamms.randomdog.ImageCache
-import com.jithinsyamms.randomdog.Utils
+import com.jithinsyamms.randomdog.utils.Utils
+import com.jithinsyamms.randomdog.db.DBManager
 
 
 object ImageManager {
 
    private const val maxImageInCache = 20
    private val imageCache = ImageCache()
-   private val dbHelper = DBHelper(GlobalApplication.instance.applicationContext)
+   private val dbHelper = DBManager(GlobalApplication.instance.applicationContext)
 
 
    init {

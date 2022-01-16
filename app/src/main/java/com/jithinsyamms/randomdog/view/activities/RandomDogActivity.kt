@@ -1,10 +1,9 @@
-package com.jithinsyamms.randomdog.activities
+package com.jithinsyamms.randomdog.view.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import com.jithinsyamms.randomdog.R
 
 class RandomDogActivity : AppCompatActivity() {

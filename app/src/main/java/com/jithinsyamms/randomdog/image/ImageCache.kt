@@ -1,8 +1,6 @@
-package com.jithinsyamms.randomdog
+package com.jithinsyamms.randomdog.image
 
 import android.graphics.Bitmap
-import android.util.Log
-
 
 class ImageCache {
 
@@ -12,7 +10,6 @@ class ImageCache {
     fun cacheImage(key:String, image: Bitmap) {
         cacheKeys.add(key)
         imageCache[key] = image
-        Log.d("Cache", "JithinSyam cache size is " + cacheKeys.size)
     }
 
     fun getAllImages() : ArrayList<Bitmap> {

@@ -1,17 +1,16 @@
-package com.jithinsyamms.randomdog
+package com.jithinsyamms.randomdog.db
 
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.util.Log
+import com.jithinsyamms.randomdog.model.RandomDog
+import com.jithinsyamms.randomdog.utils.Utils
 
 
-class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
-
+class DBManager(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     override fun onCreate(db: SQLiteDatabase) {
-        Log.d("RandomDog","JithinSyam onCreate called in db")
         db.execSQL(SQL_CREATE_TABLE)
     }
 
@@ -34,6 +33,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
                 }
             } while (cursor.moveToNext())
         }
+        cursor.close()
 
         return imageList
     }
@@ -43,14 +43,12 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         values.put(DOGS_COLUMN_KEY, key)
         values.put(DOGS_COLUMN_IMAGE, image)
         val db = this.writableDatabase
-        val res = db.insert(DATABASE_TABLE_NAME, null, values)
-        Log.d("RandomDog","JithinSyam inserted to DB $res")
+        db.insert(DATABASE_TABLE_NAME, null, values)
     }
 
     fun delete(key: String) {
         val db = this.writableDatabase
-        val deletedRows = db.delete(DATABASE_TABLE_NAME, "$DOGS_COLUMN_KEY=?", arrayOf(key))
-        Log.d("RandomDog","JithinSyam deleted from DB $deletedRows")
+        db.delete(DATABASE_TABLE_NAME, "$DOGS_COLUMN_KEY=?", arrayOf(key))
     }
 
     fun deleteAll() {
@@ -68,11 +66,11 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         private const val DOGS_COLUMN_IMAGE = "image"
 
         const val SQL_CREATE_TABLE =  "CREATE TABLE " + DATABASE_TABLE_NAME + " (" +
-        DBHelper.DOGS_COLUMN_KEY + " TEXT PRIMARY KEY, " +
+        DOGS_COLUMN_KEY + " TEXT PRIMARY KEY, " +
         DOGS_COLUMN_IMAGE + " BLOB )"
 
         const val SQL_DELETE_ALL_ENTRIES = " DELETE FROM $DATABASE_TABLE_NAME"
         const val SQL_DELETE_TABLE = "DROP TABLE IF EXISTS $DATABASE_TABLE_NAME"
-        const val FETCH_DOGS_QUERY = "SELECT * FROM $DATABASE_TABLE_NAME ORDER BY $DOGS_COLUMN_KEY "
+        const val FETCH_DOGS_QUERY = "SELECT * FROM $DATABASE_TABLE_NAME ORDER BY $DOGS_COLUMN_KEY ASC"
     }
 }

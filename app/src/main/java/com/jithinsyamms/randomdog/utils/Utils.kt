@@ -1,10 +1,8 @@
-package com.jithinsyamms.randomdog
+package com.jithinsyamms.randomdog.utils
 
 import android.graphics.Bitmap
 import java.io.ByteArrayOutputStream
 import android.graphics.BitmapFactory
-
-
 
 
 class Utils {

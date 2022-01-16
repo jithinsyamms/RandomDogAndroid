@@ -1,4 +1,4 @@
-package com.jithinsyamms.randomdog
+package com.jithinsyamms.randomdog.image
 
 import android.graphics.Bitmap
 

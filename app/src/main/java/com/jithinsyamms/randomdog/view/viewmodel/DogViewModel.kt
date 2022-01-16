@@ -1,24 +1,17 @@
-package com.jithinsyamms.randomdog
+package com.jithinsyamms.randomdog.view.viewmodel
 
 import android.graphics.Bitmap
-import android.util.Log
-import com.jithinsyamms.randomdog.manager.ImageManager
+import com.jithinsyamms.randomdog.image.ImageListener
+import com.jithinsyamms.randomdog.image.ImageManager
 import com.jithinsyamms.randomdog.network.NetworkManager
 
 
+class DogViewModel(listener: ImageListener) {
 
-
-class DogViewModel {
-
-    var listener: ImageListener? = null
-
-    constructor(listener: ImageListener) {
-        this.listener = listener
-    }
+    private var listener: ImageListener? = listener
 
     fun fetchRandomDog() {
         NetworkManager.getRandomDog{ bitmap ->
-            Log.d("Network", "JithinSyam Received bitmap")
             listener?.imageDownloaded(bitmap)
             ImageManager.cacheImage(bitmap)
         }
