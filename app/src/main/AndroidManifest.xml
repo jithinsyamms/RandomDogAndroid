@@ -15,15 +15,12 @@
         <activity
             android:name=".view.activities.RecentDogsActivity"
             android:exported="false"
-            android:configChanges="orientation|keyboardHidden|screenSize"
             />
         <activity
             android:name=".view.activities.GenerateDogActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false" />
         <activity
             android:name=".view.activities.RandomDogActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
