@@ -20,6 +20,24 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         onCreate(db)
     }
 
+    fun getAllImages() : ArrayList<RandomDog> {
+        val db = this.readableDatabase
+        val imageList = ArrayList<RandomDog>()
+        val cursor = db.rawQuery(FETCH_DOGS_QUERY, null)
+
+        if (cursor.moveToFirst()){
+            do {
+                val image = Utils.getImage(cursor.getBlob(1))
+                if (image != null) {
+                    val dog = RandomDog(cursor.getString(0), image)
+                    imageList.add(dog)
+                }
+            } while (cursor.moveToNext())
+        }
+
+        return imageList
+    }
+
     fun addImage(key: String, image: ByteArray) {
         val values = ContentValues()
         values.put(DOGS_COLUMN_KEY, key)
@@ -29,24 +47,15 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         Log.d("RandomDog","JithinSyam inserted to DB $res")
     }
 
-    fun getAllImages() : ArrayList<RandomDog> {
-        val db = this.readableDatabase
-        var imageList = ArrayList<RandomDog>()
-        val cursor = db.rawQuery(FETCH_DOGS_QUERY, null)
+    fun delete(key: String) {
+        val db = this.writableDatabase
+        val deletedRows = db.delete(DATABASE_TABLE_NAME, "$DOGS_COLUMN_KEY=?", arrayOf(key))
+        Log.d("RandomDog","JithinSyam deleted from DB $deletedRows")
+    }
 
-        if (cursor.moveToFirst()){
-            do {
-               val key = cursor.getString(0)
-               val byteArray = cursor.getBlob(1)
-               val image = Utils.getImage(byteArray)
-               if (image != null) {
-                   val dog = RandomDog(key, image!!)
-                   imageList.add(dog)
-               }
-            }while (cursor.moveToNext())
-        }
-
-        return imageList
+    fun deleteAll() {
+        val db = this.writableDatabase
+        db.execSQL(SQL_DELETE_ALL_ENTRIES)
     }
 
 
@@ -62,7 +71,8 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         DBHelper.DOGS_COLUMN_KEY + " TEXT PRIMARY KEY, " +
         DOGS_COLUMN_IMAGE + " BLOB )"
 
+        const val SQL_DELETE_ALL_ENTRIES = " DELETE FROM $DATABASE_TABLE_NAME"
         const val SQL_DELETE_TABLE = "DROP TABLE IF EXISTS $DATABASE_TABLE_NAME"
-        const val FETCH_DOGS_QUERY = "SELECT * FROM $DATABASE_TABLE_NAME"
+        const val FETCH_DOGS_QUERY = "SELECT * FROM $DATABASE_TABLE_NAME ORDER BY $DOGS_COLUMN_KEY "
     }
 }

@@ -1,17 +1,20 @@
 package com.jithinsyamms.randomdog.activities
 
-import android.content.Context
 import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.jithinsyamms.randomdog.R
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.volley.toolbox.ImageLoader
+import com.jithinsyamms.randomdog.DogViewModel
+import com.jithinsyamms.randomdog.ImageListener
 import com.jithinsyamms.randomdog.manager.ImageManager
 
 
@@ -48,21 +51,32 @@ class ImageListAdapter(private val imageList: List<Bitmap>) : RecyclerView.Adapt
 
 
 
-class RecentDogsActivity : AppCompatActivity() {
+class RecentDogsActivity : AppCompatActivity(), ImageListener {
 
 
     private lateinit var imageList: RecyclerView
+    private var dogViewModel = DogViewModel(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recent_dogs)
+        setUpImageList()
+        findViewById<Button>(R.id.clearAll).setOnClickListener {
+            dogViewModel.clearDogs()
+        }
+    }
+
+    fun setUpImageList() {
         imageList = findViewById(R.id.imageList)
         val layoutManager = LinearLayoutManager(this)
         layoutManager.orientation = LinearLayoutManager.HORIZONTAL
         imageList.setLayoutManager(layoutManager)
-
-        var list = ImageManager.getImages()
-        var adapter = ImageListAdapter(list)
-        imageList.adapter = adapter
+        imageList.adapter = ImageListAdapter(dogViewModel.getAllImages())
     }
+
+    override fun imageDownloaded(image: Bitmap) {
+       
+    }
+
+
 }
