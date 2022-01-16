@@ -60,22 +60,24 @@ class RecentDogsActivity : AppCompatActivity(), ImageListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recent_dogs)
+
         setUpImageList()
         findViewById<Button>(R.id.clearAll).setOnClickListener {
             dogViewModel.clearDogs()
+            imageList.adapter = ImageListAdapter(dogViewModel.getAllImages())
         }
     }
 
-    fun setUpImageList() {
+    private fun setUpImageList() {
         imageList = findViewById(R.id.imageList)
         val layoutManager = LinearLayoutManager(this)
         layoutManager.orientation = LinearLayoutManager.HORIZONTAL
-        imageList.setLayoutManager(layoutManager)
+        imageList.layoutManager = layoutManager
         imageList.adapter = ImageListAdapter(dogViewModel.getAllImages())
     }
 
     override fun imageDownloaded(image: Bitmap) {
-       
+
     }
 
 

@@ -18,19 +18,22 @@ class GenerateDogActivity : AppCompatActivity(), ImageListener {
 
     private var dogImageView: ImageView? = null
     private var dogViewModel = DogViewModel(this)
+    private lateinit var generateButton:Button;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_generate_dog)
-
         dogImageView  = findViewById<ImageView>(R.id.dogImageView)
-        findViewById<Button>(R.id.generate).setOnClickListener {
+        generateButton = findViewById<Button>(R.id.generate)
+        generateButton.setOnClickListener {
             Log.d("Network", "JithinSyam calling getRandomDog in activity")
+            generateButton.isEnabled = false
             dogViewModel.fetchRandomDog()
         }
     }
 
     override fun imageDownloaded(image: Bitmap) {
         dogImageView?.setImageBitmap(image)
+        generateButton.isEnabled = true
     }
 }
